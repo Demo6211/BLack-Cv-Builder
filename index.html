@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!-- Made By BLack | ATS CV Builder: single file, no build. Open it or upload it to GitHub Pages. -->
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ATS CV Builder | Made By BLack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--g:#ffd24a;--bg:#0a0a0f;--p:#14141c;--b:#2a2a38;--t:#eee}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% -10%,#241d08,#0a0a0f 55%);color:var(--t);font:15px/1.5 Cairo,Tahoma,Arial,sans-serif;min-height:100vh}
+header{text-align:center;padding:18px 10px 6px}
+h1.app{margin:0;font-size:26px;color:var(--g);text-shadow:0 0 8px #ffb300,0 0 22px #ff9d00;letter-spacing:.5px}
+.made{display:inline-block;margin-top:4px;font:900 15px Lato,Arial,sans-serif;letter-spacing:3px;color:#fff3b0;animation:neon 2.2s ease-in-out infinite alternate}
+@keyframes neon{from{text-shadow:0 0 4px #ffd24a,0 0 10px #ffb300;color:#ffe9a0}to{text-shadow:0 0 8px #ffd24a,0 0 22px #ffb300,0 0 42px #ff8c00,0 0 60px #ff8c00;color:#fff}}
+.clk{margin:8px auto 0;font:700 28px Lato,Arial,sans-serif;letter-spacing:4px;color:#ffe9a8;direction:ltr;animation:calm 4s ease-in-out infinite alternate}.clk small{display:block;font:600 12px Cairo,Arial;letter-spacing:1px;color:#d9b85a}
+@keyframes calm{from{text-shadow:0 0 6px #ffd24a77,0 0 14px #ffb30044}to{text-shadow:0 0 9px #ffd24a,0 0 24px #ffb30088}}
+.top{display:flex;justify-content:center;gap:8px;margin-top:8px}
+main{display:grid;grid-template-columns:minmax(300px,430px) 1fr;gap:14px;padding:12px;max-width:1300px;margin:auto}
+.card{background:var(--p);border:1px solid var(--b);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 0 0 1px #ffd24a10,0 0 18px #ffd24a0d}
+.card h2{margin:0 0 8px;font-size:16px;color:var(--g)}
+label{display:block;font-size:13px;margin:8px 0 3px;color:#cfcfd8}
+textarea,input[type=text],select{width:100%;font:inherit;color:var(--t);background:#0d0d13;border:1px solid var(--b);border-radius:8px;padding:9px}
+textarea{height:190px;resize:vertical}
+input[type=range]{width:100%;accent-color:var(--g)}
+.btn{font:700 14px Cairo,Arial;border:1px solid var(--g);background:transparent;color:var(--g);border-radius:9px;padding:10px 14px;cursor:pointer;margin:6px 6px 0 0;min-height:42px}
+.btn:hover{background:#ffd24a1a}.btn.main{background:var(--g);color:#201800;box-shadow:0 0 14px #ffb30088}.btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.ck{display:flex;gap:8px;align-items:flex-start;font-size:13px}.ck input{margin-top:4px;width:18px;height:18px;accent-color:var(--g)}
+#msg{font-size:13px;min-height:20px;margin-top:8px;color:#ffe08a}.warn{font-size:12px;color:#ffb7a8;background:#2a1612;border-radius:8px;padding:8px;margin-top:8px}
+.sl{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #20202b}.sl span{flex:1}.sl button{background:#0d0d13;color:var(--g);border:1px solid var(--b);border-radius:6px;width:34px;height:30px;cursor:pointer}
+.score{display:flex;gap:14px;align-items:center}.ring{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;flex:none;background:conic-gradient(var(--g) calc(var(--s)*1%),#262633 0);box-shadow:0 0 16px #ffb30055}
+.ring b{width:72px;height:72px;border-radius:50%;background:var(--p);display:grid;place-items:center;font:900 24px Lato,Arial;color:var(--g)}
+.tbl{width:100%;font-size:12.5px;border-collapse:collapse;margin-top:8px}.tbl td{padding:3px 4px;border-bottom:1px solid #20202b}.tbl td:last-child{text-align:end;white-space:nowrap}
+.ok{color:#8fe3a1}.no{color:#ff9a8a}.sg li{margin:3px 0;font-size:13px}
+.wrap{overflow:hidden;border-radius:8px;border:1px solid var(--b);background:#1b1b24;padding:8px}
+#cv{width:210mm;transform-origin:top left;background:#faf7f3;color:#222;font-family:Lato,Carlito,Calibri,Arial,sans-serif;font-size:var(--fs,11pt);line-height:var(--lh,1.3);padding:14mm 15mm;min-height:297mm;box-decoration-break:clone;-webkit-box-decoration-break:clone;outline:none;margin:0}
+#cv[dir=rtl]{font-family:Amiri,'Noto Naskh Arabic',Tahoma,serif}#cv[dir=rtl] *{letter-spacing:0!important;text-transform:none!important}
+#cv.white{background:#fff}
+#cv h1{font-size:2.1em;text-align:center;text-transform:uppercase;margin:0 0 4px;line-height:1.15;letter-spacing:.3px}
+#cv .t{text-align:center;font-weight:700;font-size:1.14em;margin-bottom:4px}#cv .c{text-align:center;font-size:.95em;margin-bottom:14px}
+#cv .l{font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--ac,#333);padding-bottom:2px;margin-bottom:5px}
+#cv .sec{margin-bottom:11px}#cv .job{margin-bottom:9px;break-inside:avoid}.row{display:flex;justify-content:space-between;gap:8px;font-weight:700}.row span:last-child{white-space:nowrap}
+#cv ul{margin:2px 0 0;padding-inline-start:5mm}#cv li{margin:1px 0}#cv p{margin:0}.hid{display:none!important}
+#cv bdi{unicode-bidi:isolate}
+.pn{font-size:13px;margin:0 0 8px;color:#ffe08a}
+@page{size:A4;margin:0}
+@media print{html,body{background:#faf7f3!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}header,.col-l,.card:not(.pv),.pn,.no-print,.pv>.btn,.pv>span{display:none!important}.pv{background:none;border:0;box-shadow:none;padding:0;margin:0}.col-r{display:block}main{display:block;padding:0;max-width:none}.wrap{border:0;padding:0;background:none;overflow:visible;height:auto!important}main,.col-r{height:auto}html,body{height:auto;min-height:0!important;overflow:visible}main{margin:0!important}.pv{overflow:hidden}#cv{transform:none!important;zoom:1!important;width:210mm;min-height:0;box-shadow:none}#cv.white,body.wp{background:#fff!important}}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+</style></head><body>
+<header><h1 class="app" data-i="title"></h1><div class="made">Made By BLack</div>
+<div class="clk" id="clk"></div><div class="top"><button class="btn" id="ul" onclick="setUI(UI==='ar'?'en':'ar')"></button></div></header>
+<main>
+<div class="col-l">
+<div class="card"><h2 data-i="h_in"></h2>
+<label data-i="l_raw"></label><textarea id="raw" data-p="p_raw"></textarea>
+<label data-i="l_lang"></label><select id="lang"><option value="auto" data-i="o_auto"></option><option value="ar">العربية</option><option value="en">English</option></select>
+<label data-i="l_target"></label><input type="text" id="target" data-p="p_target">
+<label class="ck"><input type="checkbox" id="agree" onchange="upd()"><span data-i="c_agree"></span></label>
+<button class="btn main" id="gen" onclick="generate()" data-i="b_gen"></button>
+<button class="btn" onclick="blank()" data-i="b_blank"></button>
+<button class="btn" onclick="demo()" data-i="b_demo"></button>
+<div id="msg"></div><div class="warn" data-i="w_ai"></div></div>
+<div class="card"><h2 data-i="h_style"></h2>
+<label><span data-i="l_fs"></span> <b id="fsv"></b></label><input type="range" id="fs" min="9" max="12.5" step=".25" value="11" oninput="sty()">
+<label><span data-i="l_lh"></span> <b id="lhv"></b></label><input type="range" id="lh" min="1.1" max="1.6" step=".05" value="1.3" oninput="sty()">
+<label data-i="l_paper"></label><select id="paper" onchange="sty()"><option value="cream" data-i="o_cream"></option><option value="white" data-i="o_white"></option></select>
+<label data-i="l_acc"></label><select id="acc" onchange="sty()"><option value="#333">Black</option><option value="#1f4e79">Navy</option><option value="#b8860b">Gold</option></select>
+<button class="btn" onclick="autofit()" data-i="b_fit"></button>
+<h2 style="margin-top:14px" data-i="h_sec"></h2><div id="secs"></div></div>
+</div>
+<div class="col-r">
+<div class="card"><h2 data-i="h_ats"></h2><div class="score"><div class="ring" id="ring" style="--s:0"><b id="sc">0</b></div><div><div id="sctxt" style="font-size:13px"></div></div></div>
+<table class="tbl" id="tb"></table><h2 style="margin-top:12px" data-i="h_sug"></h2><ul class="sg" id="sg"></ul><div class="warn" data-i="w_ats"></div></div>
+<div class="card pv"><div class="pn" id="pn"></div>
+<button class="btn main" id="dl" onclick="dl()" data-i="b_dl" disabled></button><span class="pn" data-i="hint"></span>
+<div class="wrap" id="wrap" style="margin-top:8px"><div id="cv" contenteditable="true" spellcheck="false"></div></div></div>
+</div></main>
+<script>
+const $=id=>document.getElementById(id),API='https://text.pollinations.ai/openai';
+const I={ar:{title:'أداة سيرة ذاتية ATS',ul:'English',h_in:'بيانات العميل',l_raw:'البيانات الخام (بأي ترتيب)',p_raw:'الصق بيانات العميل: الاسم، الوظيفة، التواصل، الخبرات بتواريخها، التعليم، المهارات، الدورات، اللغات',l_lang:'لغة السيرة',o_auto:'نفس لغة البيانات',l_target:'الوظيفة المستهدفة (لتحسين الكلمات المفتاحية)',p_target:'مثال: مسؤول خدمة عملاء',c_agree:'موافق إن النص يتبعت لخدمة Pollinations المجانية (تحتاج إنترنت، وقد تخزّن الرد مؤقتًا لحد 30 يوم). للكتابة بالذكاء الاصطناعي فقط.',b_gen:'اكتب السيرة بالذكاء الاصطناعي',b_blank:'قالب فاضي (يدوي)',b_demo:'عينة وهمية ثابتة',w_ai:'الكتابة بالذكاء الاصطناعي بتحتاج إنترنت وطلب واحد كل 45 ثانية. المراجعة مطلوبة: الأداة بتشيل أي بند مالوش اقتباس من بياناتك، لكن ده ما يضمنش إن الصياغة دقيقة.',h_style:'التحكم في الشكل',l_fs:'حجم الخط',l_lh:'تباعد الأسطر',l_paper:'لون الورقة',o_cream:'كريمي',o_white:'أبيض',l_acc:'لون خط العناوين',b_fit:'ضبط تلقائي لصفحتين',h_sec:'الأقسام (إظهار وترتيب)',h_ats:'تقييم توافق ATS (إرشادي)',h_sug:'اقتراحات',w_ats:'ده تقييم محلي بسيط بقواعد معلنة فوق، مش نتيجة من أي نظام توظيف حقيقي ولا يضمن قبول. الأنظمة الحقيقية بتختلف.',b_dl:'تنزيل PDF',hint:'بيفتح نافذة الطباعة: اختار "حفظ كـ PDF" ومقاس A4. الاسم المقترح للملف جاهز. تقدر تعدّل النص مباشرة في الورقة.',sec:{summary:'الملخص المهني',skills:'المهارات',experience:'الخبرات المهنية',education:'التعليم',certs:'الشهادات والدورات',langs:'اللغات'},m_paste:'الصق البيانات أولًا.',m_agree:'لازم توافق على إرسال النص قبل الكتابة بالذكاء الاصطناعي.',m_wait:'جاري الكتابة... (حتى 30 ثانية)',m_cool:n=>'استنى '+n+' ثانية (حد الخدمة المجانية).',m_busy:'الخدمة المجانية مشغولة أو وصلت للحد. حاول بعد دقيقة.',m_fail:'فشل: ',m_ok:'اتكتبت. راجع كل سطر وعدّل قبل التنزيل.',m_drop:n=>'اتشال '+n+' بند لأنه مالوش اقتباس في بياناتك.',m_demo:'عينة ثابتة وهمية، مش من الذكاء الاصطناعي.',m_blank:'قالب يدوي: اكتب مكان الأقواس.',pg:n=>n+' صفحة (الحد الأقصى 2)',over:n=>'السيرة '+n+' صفحات. الحد صفحتان: اضغط الضبط التلقائي أو اختصر.',miss:'أسئلة للعميل: ',sc_note:'من 100 بقواعد محلية',pts:'نقطة',k_no:'اكتب وظيفة مستهدفة لتفعيل فحص الكلمات المفتاحية (بيتحسب التقييم من 85 وتتحول لـ 100).'},
+en:{title:'ATS CV Builder',ul:'العربية',h_in:'Client data',l_raw:'Raw data (any order)',p_raw:"Paste the client's data: name, title, contacts, jobs with dates, education, skills, courses, languages",l_lang:'CV language',o_auto:'Same as the data',l_target:'Target job (improves keywords)',p_target:'e.g. Customer Support Agent',c_agree:'I agree the text is sent to the free Pollinations service (needs internet; it may cache the reply up to 30 days). For AI writing only.',b_gen:'Write CV with AI',b_blank:'Blank template (manual)',b_demo:'Fixed fictional sample',w_ai:'AI writing needs internet and one request per 45 s. Review is required: the tool removes any item without a quote from your data, which does not guarantee the wording is accurate.',h_style:'Layout controls',l_fs:'Font size',l_lh:'Line spacing',l_paper:'Paper',o_cream:'Cream',o_white:'White',l_acc:'Heading line color',b_fit:'Auto-fit to 2 pages',h_sec:'Sections (show and order)',h_ats:'ATS match score (guide)',h_sug:'Suggestions',w_ats:'A simple local score using the rules listed above. It is not from any real hiring system and does not guarantee acceptance. Real systems differ.',b_dl:'Download PDF',hint:'Opens the print dialog: choose "Save as PDF", A4. The file name is prefilled. You can edit the text directly on the paper.',sec:{summary:'Summary',skills:'Key skills',experience:'Experience',education:'Education',certs:'Certifications',langs:'Languages'},m_paste:'Paste the data first.',m_agree:'Tick the consent box before AI writing.',m_wait:'Writing... (up to 30 s)',m_cool:n=>'Wait '+n+' s (free service limit).',m_busy:'The free service is busy or at its limit. Try again in a minute.',m_fail:'Failed: ',m_ok:'Written. Review and edit every line before downloading.',m_drop:n=>n+' item(s) removed: no quote in your data.',m_demo:'Fixed fictional sample, not AI output.',m_blank:'Manual template: type over the brackets.',pg:n=>n+' page(s) (max 2)',over:n=>'CV is '+n+' pages. Max is 2: use Auto-fit or shorten.',miss:'Ask the client: ',sc_note:'out of 100, local rules',pts:'pts',k_no:'Add a target job to enable the keyword check (score is out of 85, scaled to 100).'}};
+let UI=localStorage.ui||'ar',last=0,CVD=null,ORDER=['summary','skills','experience','education','certs','langs'];
+const T=(k,a)=>{const v=I[UI][k];return typeof v==='function'?v(a):v};
+function setUI(l){UI=l;localStorage.ui=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';$('ul').textContent=I[l].ul;
+document.querySelectorAll('[data-i]').forEach(e=>e.textContent=T(e.dataset.i));document.querySelectorAll('[data-p]').forEach(e=>e.placeholder=T(e.dataset.p));drawSecs();upd();if(CVD)refresh()}
+const say=t=>$('msg').textContent=t;
+const esc=s=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const norm=s=>String(s||'').toLowerCase().replace(/[\u064B-\u0652\u0640]/g,'').replace(/\s+/g,' ').trim();
+const nums=s=>(String(s).match(/[0-9٠-٩]+/g)||[]).map(n=>n.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)));
+const yr=p=>{p=String(p||'');if(/present|now|current|until|حتى|الآن|حالي|الحاضر|لحد/i.test(p))return 9999;const m=p.match(/(19|20)\d\d/g);return m?Math.max(...m.map(Number)):0};
+function upd(){$('gen').disabled=!$('agree').checked}
+const SYS=`You are a careful ATS resume writer. Turn the candidate data into resume JSON.
+RULES:
+- Use ONLY facts in the data. Never invent employers, dates, degrees, numbers, tools, duties or results. If data is thin, write fewer items.
+- Every bullet and every skill MUST carry "src": an exact quote copied character for character from the candidate data. No quote, no item.
+- Bullets start with an action verb and only restate the quote, no added results.
+- summary: 2 plain sentences from the title, years and roles in the data, no praise, no numbers except years in the data.
+- Experience newest first. linkedin empty if not given. Never guess contact values.
+- Output language: LANG. If Arabic write everything in Arabic and set dir to rtl, else ltr.
+- "missing": questions worth asking the client about missing data (omit if none).
+Return ONLY JSON: {"dir":"ltr","name":"","title":"","email":"","phone":"","address":"","linkedin":"","summary":"","skills":[{"text":"","src":""}],"experience":[{"role":"","company":"","period":"","bullets":[{"text":"","src":""}]}],"education":[{"school":"","detail":"","year":""}],"certifications":[""],"languages":[""],"missing":[]}`;
+function verify(d,raw){const r=norm(raw),rn=new Set(nums(raw));let dr=0;const ok=i=>{const t=typeof i==='string'?i:i.text,s=typeof i==='string'?'':norm(i.src);return !!s&&r.includes(s)&&nums(t).every(n=>rn.has(n))};const tx=i=>typeof i==='string'?i:i.text;
+d.skills=(d.skills||[]).filter(s=>ok(s)||(dr++,0)).map(tx);
+d.experience=(d.experience||[]).map(e=>({...e,bullets:(e.bullets||[]).filter(b=>ok(b)||(dr++,0)).map(tx)}));
+d.missing=(d.missing||[]).filter(m=>String(m).trim());return{d,dr}}
+async function generate(){const raw=$('raw').value.trim();if(!raw)return say(T('m_paste'));if(!$('agree').checked)return say(T('m_agree'));
+const w=45000-(Date.now()-last);if(w>0)return say(T('m_cool',Math.ceil(w/1000)));last=Date.now();$('gen').disabled=true;say(T('m_wait'));
+try{const L=$('lang').value==='ar'?'Arabic':$('lang').value==='en'?'English':'same as the candidate data',tg=$('target').value.slice(0,120);
+const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'openai',messages:[{role:'system',content:SYS.replace('LANG',L)},{role:'user',content:(tg?'Target job: '+tg+'\n':'')+'CANDIDATE DATA:\n'+raw.slice(0,8000)}],response_format:{type:'json_object'}})});
+if([402,429,503].includes(r.status))throw new Error(T('m_busy'));if(!r.ok)throw new Error('HTTP '+r.status);
+const j=await r.json(),c=String(j.choices[0].message.content),o=JSON.parse(c.slice(c.indexOf('{'),c.lastIndexOf('}')+1)),v=verify(o,raw);
+draw(v.d);say(v.dr?T('m_drop',v.dr)+' '+T('m_ok'):T('m_ok'))}catch(e){say(T('m_fail')+(e&&e.message||e))}finally{upd()}}
+const FIX={ar:{dir:'rtl',name:'سامح أحمد',title:'مسؤول خدمة عملاء',email:'sameh.test@example.com',phone:'010XXXXXXXX',address:'الجيزة، مصر',summary:'عينة وهمية ثابتة.',skills:['التواصل','التعامل مع الشكاوى','Zendesk','Excel','تنظيم الوقت','إدخال البيانات'],experience:[{role:'مسؤول خدمة عملاء',company:'شركة الأفق التجريبية',period:'يناير 2023 - الآن',bullets:['الرد على استفسارات العملاء بالمكالمات والبريد','تسجيل الشكاوى على Zendesk','متابعة حل مشاكل الفواتير']},{role:'موظف مركز اتصال',company:'شركة المسار التجريبية',period:'يوليو 2020 - ديسمبر 2022',bullets:['استقبال المكالمات وشرح الخدمات','تسجيل طلبات العملاء']}],education:[{school:'جامعة حلوان',year:'2020',detail:'بكالوريوس تجارة'}],certifications:['دورة أساسيات خدمة العملاء 2021','دورة Excel للمبتدئين 2022'],languages:['العربية (لغة أم)','الإنجليزية (جيد)'],missing:[]},
+en:{dir:'ltr',name:'Sameh Ahmed',title:'Customer Support Specialist',email:'sameh.test@example.com',phone:'010XXXXXXXX',address:'Giza, Egypt',summary:'Fixed fictional sample.',skills:['Communication','Complaint handling','Zendesk','Excel','Time management','Data entry'],experience:[{role:'Customer Support Specialist',company:'Horizon Test Services',period:'Jan 2023 - Present',bullets:['Answered customer questions by phone and email','Logged complaints in Zendesk','Followed up on billing issues']},{role:'Call Center Agent',company:'Masar Test Co',period:'Jul 2020 - Dec 2022',bullets:['Handled incoming calls and explained services','Recorded customer requests']}],education:[{school:'Helwan University',year:'2020',detail:'BCom'}],certifications:['Customer Service Basics 2021','Excel for Beginners 2022'],languages:['Arabic (Native)','English (Good)'],missing:[]}};
+function demo(){draw(FIX[UI==='ar'?'ar':'en']);say(T('m_demo'))}
+function blank(){const a=UI==='ar';draw({dir:a?'rtl':'ltr',name:a?'[الاسم]':'[Full name]',title:a?'[المسمى الوظيفي]':'[Job title]',email:'[email]',phone:'[phone]',address:a?'[المدينة]':'[City]',summary:a?'[ملخص من سطرين]':'[Two-line summary]',skills:[a?'[مهارة]':'[Skill]'],experience:[{role:a?'[الوظيفة]':'[Role]',company:a?'[الشركة]':'[Company]',period:'[2020 - 2024]',bullets:[a?'[ما فعلته]':'[What you did]']}],education:[{school:a?'[الجامعة]':'[School]',year:'[2018]',detail:a?'[الدرجة]':'[Degree]'}],certifications:[],languages:[],missing:[]});say(T('m_blank'))}
+function draw(d){CVD=d;refresh()}
+function refresh(){const d=CVD,rtl=d.dir==='rtl',cv=$('cv');const H=I[rtl?'ar':'en'].sec;
+const ex=(d.experience||[]).map((x,i)=>[x,i]).sort((a,b)=>yr(b[0].period)-yr(a[0].period)||a[1]-b[1]).map(a=>a[0]);
+const ul=a=>'<ul>'+a.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
+const S={summary:d.summary&&'<p>'+esc(d.summary)+'</p>',skills:(d.skills||[]).length&&ul(d.skills),experience:ex.length&&ex.map(x=>`<div class="job"><div class="row"><span>${esc(x.role)}</span><span>${esc(x.period)}</span></div><div><b>${esc(x.company)}</b></div>${ul(x.bullets||[])}</div>`).join(''),education:(d.education||[]).length&&d.education.map(x=>`<div class="job"><div class="row"><span>${esc(x.school)}</span><span>${esc(x.year)}</span></div><div>${esc(x.detail)}</div></div>`).join(''),certs:(d.certifications||[]).length&&ul(d.certifications),langs:(d.languages||[]).length&&ul(d.languages)};
+const ct=[d.email,d.phone,d.address,d.linkedin].filter(Boolean).map(x=>'<bdi dir="ltr">'+esc(x)+'</bdi>').join(' | ');
+cv.dir=rtl?'rtl':'ltr';cv.lang=rtl?'ar':'en';
+cv.innerHTML=`<h1>${esc(d.name)}</h1><div class="t">${esc(d.title)}</div><div class="c">${ct}</div>`+ORDER.map(k=>S[k]?`<div class="sec" data-k="${k}"><div class="l">${H[k]}</div><div class="b">${S[k]}</div></div>`:'').join('');
+$('dl').disabled=false;sty();drawSecs()}
+function drawSecs(){const h=$('secs');h.innerHTML=ORDER.map((k,i)=>`<div class="sl"><input type="checkbox" ${(document.querySelector('#cv .sec[data-k='+k+']')||{classList:{contains:()=>0}}).classList.contains('hid')?'':'checked'} onchange="tg('${k}',this.checked)"><span>${I[UI].sec[k]}</span><button onclick="mv('${k}',-1)">&#9650;</button><button onclick="mv('${k}',1)">&#9660;</button></div>`).join('')}
+function tg(k,on){const e=document.querySelector('#cv .sec[data-k='+k+']');if(e)e.classList.toggle('hid',!on);measure()}
+function mv(k,dir){const i=ORDER.indexOf(k),j=i+dir;if(j<0||j>=ORDER.length)return;[ORDER[i],ORDER[j]]=[ORDER[j],ORDER[i]];const cv=$('cv'),a=cv.querySelector('.sec[data-k='+k+']'),b=cv.querySelector('.sec[data-k='+ORDER[i]+']');
+if(a&&b){if(dir<0)b.parentNode.insertBefore(a,b);else b.parentNode.insertBefore(a,b.nextSibling)}drawSecs();measure()}
+function sty(){const cv=$('cv');cv.style.setProperty('--fs',$('fs').value+'pt');cv.style.setProperty('--lh',$('lh').value);cv.style.setProperty('--ac',$('acc').value);cv.classList.toggle('white',$('paper').value==='white');document.body.classList.toggle('wp',$('paper').value==='white');$('fsv').textContent=$('fs').value+'pt';$('lhv').textContent=$('lh').value;measure()}
+function fitView(){const w=$('wrap'),cv=$('cv');const full=cv.offsetWidth||794,avail=w.clientWidth-16,s=Math.min(1,avail/full);cv.style.transform=s<1?'scale('+s+')':'none';w.style.height=(cv.offsetHeight*s+16)+'px'}
+function pages(){const cv=$('cv');const mm=cv.offsetWidth/210;return Math.max(1,Math.ceil((cv.offsetHeight/mm-28)/269-0.03))}
+function measure(){if(!CVD)return;fitView();const p=pages();$('pn').textContent=p>2?T('over',p):T('pg',p);$('pn').style.color=p>2?'#ff9a8a':'#ffe08a';ats(p);if(CVD.missing&&CVD.missing.length&&!$('pn').dataset.m)$('pn').textContent+=' | '+T('miss')+CVD.missing.join(' / ')}
+function autofit(){let f=+$('fs').value,l=+$('lh').value;for(let i=0;i<20&&pages()>2;i++){if(f>9)f-=.25;else if(l>1.1)l-=.05;else break;$('fs').value=f;$('lh').value=l;$('cv').style.setProperty('--fs',f+'pt');$('cv').style.setProperty('--lh',l)}sty()}
+function ats(p){const cv=$('cv'),txt=norm(cv.innerText),R=[],S=[],g=(n,m,pt,ok,tip)=>{R.push([n,pt,m,ok]);if(!ok&&tip)S.push(tip)};
+const ar=UI==='ar',sc=k=>cv.querySelector('.sec[data-k='+k+']:not(.hid)'),nm=(cv.querySelector('h1')||{}).innerText||'',ct=(cv.querySelector('.c')||{}).innerText||'';
+const em=/[^\s@]+@[^\s@]+\.[^\s@]+/.test(ct),ph=/[0-9٠-٩][0-9٠-٩\sX\-+()]{7,}/i.test(ct),nmo=nm.trim().length>2&&!/^\[/.test(nm.trim());
+const cp=(nmo?5:0)+(em?5:0)+(ph?5:0);g(ar?'بيانات التواصل (اسم، إيميل، هاتف)':'Contact (name, email, phone)',15,cp,cp==15,ar?'أضف الاسم والإيميل والهاتف في سطر التواصل.':'Add name, email and phone in the contact line.');
+const sk=['summary','skills','experience','education'].filter(k=>sc(k)).length;g(ar?'عناوين أقسام قياسية (ملخص، مهارات، خبرات، تعليم)':'Standard headings (summary, skills, experience, education)',20,sk*5,sk==4,ar?'أضف الأقسام الناقصة: ملخص، مهارات، خبرات، تعليم.':'Add the missing sections: summary, skills, experience, education.');
+const jobs=[...cv.querySelectorAll('.sec[data-k=experience]:not(.hid) .job')];let full=0,bl=0;jobs.forEach(j=>{const s=j.querySelectorAll('.row span');if(s[0]&&s[0].innerText.trim()&&s[1]&&/(19|20)\d\d/.test(s[1].innerText)&&(j.querySelector('b')||{}).innerText)full++;if(j.querySelectorAll('li').length>=2)bl++});
+const jf=jobs.length?Math.round(10*full/jobs.length):0,jb=jobs.length?Math.round(10*bl/jobs.length):0;
+g(ar?'كل وظيفة فيها مسمى وشركة وسنة':'Each job has title, company and a year',10,jf,jf==10,ar?'اكتب لكل وظيفة المسمى واسم الشركة والسنة.':'Give each job a title, company and year.');
+g(ar?'كل وظيفة فيها نقطتين على الأقل':'Each job has 2+ bullets',10,jb,jb==10,ar?'اكتب نقطتين على الأقل لكل وظيفة من وقائع حقيقية.':'Write at least 2 bullets per job, from real facts.');
+const bs=[...cv.querySelectorAll('.job li')];const good=bs.filter(l=>{const n=l.innerText.trim().split(/\s+/).length;return n>=3&&n<=28}).length,bp=bs.length?Math.round(10*good/bs.length):0;
+g(ar?'طول النقاط بين 3 و28 كلمة':'Bullets are 3 to 28 words',10,bp,bp==10,ar?'اجعل كل نقطة بين 3 و28 كلمة.':'Keep each bullet between 3 and 28 words.');
+const ns=cv.querySelectorAll('.sec[data-k=skills]:not(.hid) li').length,sp=ns>=6&&ns<=15?10:ns?Math.round(10*Math.min(ns,6)/6):0;
+g(ar?'عدد المهارات من 6 إلى 15':'6 to 15 skills',10,sp,sp==10,ar?'اكتب من 6 إلى 15 مهارة حقيقية.':'List 6 to 15 real skills.');
+g(ar?'لا تزيد عن صفحتين':'At most 2 pages',10,p<=2?10:0,p<=2,ar?'قلّل الطول لصفحتين.':'Shorten to 2 pages.');
+const tg=norm($('target').value),tw=[...new Set(tg.split(/[^a-z\u0600-\u06ff0-9+#]+/).filter(w=>w.length>=3))];let max=85;
+if(tw.length){const hit=tw.filter(w=>txt.includes(w)),kp=Math.round(15*hit.length/tw.length);g((ar?'كلمات الوظيفة المستهدفة موجودة: ':'Target job words found: ')+hit.length+'/'+tw.length,15,kp,kp==15,ar?'الكلمات الناقصة: '+tw.filter(w=>!txt.includes(w)).join('، ')+' (أضفها فقط لو حقيقية).':'Missing words: '+tw.filter(w=>!txt.includes(w)).join(', ')+' (add only if true).');max=100}else S.push(T('k_no'));
+if(!bs.some(l=>/[0-9٠-٩]/.test(l.innerText)))S.push(ar?'مفيش أرقام في النقاط. لو عند العميل أرقام حقيقية (عدد عملاء، نسب) أضفها، وماتخترعش أرقام.':'No numbers in the bullets. If the client has real figures, add them. Never invent any.');
+const tot=R.reduce((a,r)=>a+r[2],0),sc2=Math.min(100,Math.round(tot*100/max));
+$('sc').textContent=sc2;$('ring').style.setProperty('--s',sc2);$('sctxt').textContent=T('sc_note');
+$('tb').innerHTML=R.map(r=>`<tr><td class="${r[3]?'ok':'no'}">${r[3]?'&#10003;':'&#10007;'}</td><td>${esc(r[0])}</td><td>${r[2]}/${r[1]}</td></tr>`).join('');
+$('sg').innerHTML=S.map(s=>'<li>'+esc(s)+'</li>').join('')||'<li class="ok">&#10003;</li>'}
+function dl(){const old=document.title,n=(($('cv').querySelector('h1')||{}).innerText||'CV').trim().replace(/[\\/:*?"<>|]+/g,' ');document.title=n+' - CV';const cv=$('cv');const tr=cv.style.transform;cv.style.transform='none';window.print();cv.style.transform=tr;document.title=old}
+window.addEventListener('afterprint',()=>setTimeout(measure,50));addEventListener('resize',measure);$('cv').addEventListener('input',()=>{clearTimeout(window.__t);window.__t=setTimeout(measure,300)});
+function tick(){const n=new Date(),l=UI==='ar'?'ar-EG-u-nu-latn':'en-GB';$('clk').innerHTML=n.toLocaleTimeString('en-GB',{hour12:false})+'<small>'+n.toLocaleDateString(l,{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'</small>'}
+setInterval(tick,1000);tick();
+setUI(UI);
+</script></body></html>
