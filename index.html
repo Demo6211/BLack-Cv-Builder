@@ -44,7 +44,7 @@ input[type=range]{width:100%;accent-color:var(--g)}
 .pn{font-size:13px;margin:0 0 8px;color:#ffe08a}
 @page{size:A4;margin:0}
 @media print{html,body{background:#faf7f3!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}header,.col-l,.card:not(.pv),.pn,.no-print,.pv>.btn,.pv>span{display:none!important}.pv{background:none;border:0;box-shadow:none;padding:0;margin:0}.col-r{display:block}main{display:block;padding:0;max-width:none}.wrap{border:0;padding:0;background:none;overflow:visible;height:auto!important}main,.col-r{height:auto}html,body{height:auto;min-height:0!important;overflow:visible}main{margin:0!important}.pv{overflow:hidden}#cv{transform:none!important;zoom:1!important;width:210mm;min-height:0;box-shadow:none}#cv.white,body.wp{background:#fff!important}}
-@media(max-width:900px){main{grid-template-columns:1fr}}
+@media(max-width:900px){main{grid-template-columns:minmax(0,1fr)}.btn{white-space:normal}}.col-l,.col-r{min-width:0}
 </style></head><body>
 <header><h1 class="app" data-i="title"></h1><div class="made">Made By BLack</div>
 <div class="clk" id="clk"></div><div class="top"><button class="btn" id="ul" onclick="setUI(UI==='ar'?'en':'ar')"></button></div></header>
@@ -63,7 +63,7 @@ input[type=range]{width:100%;accent-color:var(--g)}
 <label><span data-i="l_fs"></span> <b id="fsv"></b></label><input type="range" id="fs" min="9" max="12.5" step=".25" value="11" oninput="sty()">
 <label><span data-i="l_lh"></span> <b id="lhv"></b></label><input type="range" id="lh" min="1.1" max="1.6" step=".05" value="1.3" oninput="sty()">
 <label data-i="l_paper"></label><select id="paper" onchange="sty()"><option value="cream" data-i="o_cream"></option><option value="white" data-i="o_white"></option></select>
-<label data-i="l_acc"></label><select id="acc" onchange="sty()"><option value="#333">Black</option><option value="#1f4e79">Navy</option><option value="#b8860b">Gold</option></select>
+<label data-i="l_acc"></label><select id="acc" onchange="sty()"><option value="#333333">Black</option><option value="#1f4e79">Navy</option><option value="#b8860b">Gold</option></select>
 <button class="btn" onclick="autofit()" data-i="b_fit"></button>
 <h2 style="margin-top:14px" data-i="h_sec"></h2><div id="secs"></div></div>
 </div>
@@ -71,13 +71,13 @@ input[type=range]{width:100%;accent-color:var(--g)}
 <div class="card"><h2 data-i="h_ats"></h2><div class="score"><div class="ring" id="ring" style="--s:0"><b id="sc">0</b></div><div><div id="sctxt" style="font-size:13px"></div></div></div>
 <table class="tbl" id="tb"></table><h2 style="margin-top:12px" data-i="h_sug"></h2><ul class="sg" id="sg"></ul><div class="warn" data-i="w_ats"></div></div>
 <div class="card pv"><div class="pn" id="pn"></div>
-<button class="btn main" id="dl" onclick="dl()" data-i="b_dl" disabled></button><span class="pn" data-i="hint"></span>
+<button class="btn main" id="dl" onclick="dlPDF()" data-i="b_dl" disabled></button><button class="btn" id="pr" onclick="dl()" data-i="b_pr"></button><span class="pn" data-i="hint"></span>
 <div class="wrap" id="wrap" style="margin-top:8px"><div id="cv" contenteditable="true" spellcheck="false"></div></div></div>
 </div></main>
 <script>
 const $=id=>document.getElementById(id),API='https://text.pollinations.ai/openai';
-const I={ar:{title:'أداة سيرة ذاتية ATS',ul:'English',h_in:'بيانات العميل',l_raw:'البيانات الخام (بأي ترتيب)',p_raw:'الصق بيانات العميل: الاسم، الوظيفة، التواصل، الخبرات بتواريخها، التعليم، المهارات، الدورات، اللغات',l_lang:'لغة السيرة',o_auto:'نفس لغة البيانات',l_target:'الوظيفة المستهدفة (لتحسين الكلمات المفتاحية)',p_target:'مثال: مسؤول خدمة عملاء',c_agree:'موافق إن النص يتبعت لخدمة Pollinations المجانية (تحتاج إنترنت، وقد تخزّن الرد مؤقتًا لحد 30 يوم). للكتابة بالذكاء الاصطناعي فقط.',b_gen:'اكتب السيرة بالذكاء الاصطناعي',b_blank:'قالب فاضي (يدوي)',b_demo:'عينة وهمية ثابتة',w_ai:'الكتابة بالذكاء الاصطناعي بتحتاج إنترنت وطلب واحد كل 45 ثانية. المراجعة مطلوبة: الأداة بتشيل أي بند مالوش اقتباس من بياناتك، لكن ده ما يضمنش إن الصياغة دقيقة.',h_style:'التحكم في الشكل',l_fs:'حجم الخط',l_lh:'تباعد الأسطر',l_paper:'لون الورقة',o_cream:'كريمي',o_white:'أبيض',l_acc:'لون خط العناوين',b_fit:'ضبط تلقائي لصفحتين',h_sec:'الأقسام (إظهار وترتيب)',h_ats:'تقييم توافق ATS (إرشادي)',h_sug:'اقتراحات',w_ats:'ده تقييم محلي بسيط بقواعد معلنة فوق، مش نتيجة من أي نظام توظيف حقيقي ولا يضمن قبول. الأنظمة الحقيقية بتختلف.',b_dl:'تنزيل PDF',hint:'بيفتح نافذة الطباعة: اختار "حفظ كـ PDF" ومقاس A4. الاسم المقترح للملف جاهز. تقدر تعدّل النص مباشرة في الورقة.',sec:{summary:'الملخص المهني',skills:'المهارات',experience:'الخبرات المهنية',education:'التعليم',certs:'الشهادات والدورات',langs:'اللغات'},m_paste:'الصق البيانات أولًا.',m_agree:'لازم توافق على إرسال النص قبل الكتابة بالذكاء الاصطناعي.',m_wait:'جاري الكتابة... (حتى 30 ثانية)',m_cool:n=>'استنى '+n+' ثانية (حد الخدمة المجانية).',m_busy:'الخدمة المجانية مشغولة أو وصلت للحد. حاول بعد دقيقة.',m_fail:'فشل: ',m_ok:'اتكتبت. راجع كل سطر وعدّل قبل التنزيل.',m_drop:n=>'اتشال '+n+' بند لأنه مالوش اقتباس في بياناتك.',m_demo:'عينة ثابتة وهمية، مش من الذكاء الاصطناعي.',m_blank:'قالب يدوي: اكتب مكان الأقواس.',pg:n=>n+' صفحة (الحد الأقصى 2)',over:n=>'السيرة '+n+' صفحات. الحد صفحتان: اضغط الضبط التلقائي أو اختصر.',miss:'أسئلة للعميل: ',sc_note:'من 100 بقواعد محلية',pts:'نقطة',k_no:'اكتب وظيفة مستهدفة لتفعيل فحص الكلمات المفتاحية (بيتحسب التقييم من 85 وتتحول لـ 100).'},
-en:{title:'ATS CV Builder',ul:'العربية',h_in:'Client data',l_raw:'Raw data (any order)',p_raw:"Paste the client's data: name, title, contacts, jobs with dates, education, skills, courses, languages",l_lang:'CV language',o_auto:'Same as the data',l_target:'Target job (improves keywords)',p_target:'e.g. Customer Support Agent',c_agree:'I agree the text is sent to the free Pollinations service (needs internet; it may cache the reply up to 30 days). For AI writing only.',b_gen:'Write CV with AI',b_blank:'Blank template (manual)',b_demo:'Fixed fictional sample',w_ai:'AI writing needs internet and one request per 45 s. Review is required: the tool removes any item without a quote from your data, which does not guarantee the wording is accurate.',h_style:'Layout controls',l_fs:'Font size',l_lh:'Line spacing',l_paper:'Paper',o_cream:'Cream',o_white:'White',l_acc:'Heading line color',b_fit:'Auto-fit to 2 pages',h_sec:'Sections (show and order)',h_ats:'ATS match score (guide)',h_sug:'Suggestions',w_ats:'A simple local score using the rules listed above. It is not from any real hiring system and does not guarantee acceptance. Real systems differ.',b_dl:'Download PDF',hint:'Opens the print dialog: choose "Save as PDF", A4. The file name is prefilled. You can edit the text directly on the paper.',sec:{summary:'Summary',skills:'Key skills',experience:'Experience',education:'Education',certs:'Certifications',langs:'Languages'},m_paste:'Paste the data first.',m_agree:'Tick the consent box before AI writing.',m_wait:'Writing... (up to 30 s)',m_cool:n=>'Wait '+n+' s (free service limit).',m_busy:'The free service is busy or at its limit. Try again in a minute.',m_fail:'Failed: ',m_ok:'Written. Review and edit every line before downloading.',m_drop:n=>n+' item(s) removed: no quote in your data.',m_demo:'Fixed fictional sample, not AI output.',m_blank:'Manual template: type over the brackets.',pg:n=>n+' page(s) (max 2)',over:n=>'CV is '+n+' pages. Max is 2: use Auto-fit or shorten.',miss:'Ask the client: ',sc_note:'out of 100, local rules',pts:'pts',k_no:'Add a target job to enable the keyword check (score is out of 85, scaled to 100).'}};
+const I={ar:{title:'أداة سيرة ذاتية ATS',ul:'English',h_in:'بيانات العميل',l_raw:'البيانات الخام (بأي ترتيب)',p_raw:'الصق بيانات العميل: الاسم، الوظيفة، التواصل، الخبرات بتواريخها، التعليم، المهارات، الدورات، اللغات',l_lang:'لغة السيرة',o_auto:'نفس لغة البيانات',l_target:'الوظيفة المستهدفة (لتحسين الكلمات المفتاحية)',p_target:'مثال: مسؤول خدمة عملاء',c_agree:'موافق إن النص يتبعت لخدمة Pollinations المجانية (تحتاج إنترنت، وقد تخزّن الرد مؤقتًا لحد 30 يوم). للكتابة بالذكاء الاصطناعي فقط.',b_gen:'اكتب السيرة بالذكاء الاصطناعي',b_blank:'قالب فاضي (يدوي)',b_demo:'عينة وهمية ثابتة',w_ai:'الكتابة بالذكاء الاصطناعي بتحتاج إنترنت وطلب واحد كل 45 ثانية. المراجعة مطلوبة: الأداة بتشيل أي بند مالوش اقتباس من بياناتك، لكن ده ما يضمنش إن الصياغة دقيقة.',h_style:'التحكم في الشكل',l_fs:'حجم الخط',l_lh:'تباعد الأسطر',l_paper:'لون الورقة',o_cream:'كريمي',o_white:'أبيض',l_acc:'لون خط العناوين',b_fit:'ضبط تلقائي لصفحتين',h_sec:'الأقسام (إظهار وترتيب)',h_ats:'تقييم توافق ATS (إرشادي)',h_sug:'اقتراحات',w_ats:'ده تقييم محلي بسيط بقواعد معلنة فوق، مش نتيجة من أي نظام توظيف حقيقي ولا يضمن قبول. الأنظمة الحقيقية بتختلف.',b_dl:'تنزيل PDF مباشر',b_pr:'طباعة / حفظ من المتصفح',m_pdfw:'جاري تجهيز الـPDF... (أول مرة بينزّل الخط من Google Fonts)',m_pdfok:n=>'نزل الـPDF: '+n+' صفحة، نص حقيقي قابل للتحديد.',m_pdff:'فشل التنزيل المباشر (محتاج إنترنت للخط). جرّب زر الطباعة. ',hint:'التنزيل المباشر ينتج PDF فيه نص حقيقي وخط مدمج، ويضبط الحجم تلقائيًا لصفحتين. زر الطباعة بديل من المتصفح. تقدر تعدّل النص مباشرة في الورقة.',sec:{summary:'الملخص المهني',skills:'المهارات',experience:'الخبرات المهنية',education:'التعليم',certs:'الشهادات والدورات',langs:'اللغات'},m_paste:'الصق البيانات أولًا.',m_agree:'لازم توافق على إرسال النص قبل الكتابة بالذكاء الاصطناعي.',m_wait:'جاري الكتابة... (حتى 30 ثانية)',m_cool:n=>'استنى '+n+' ثانية (حد الخدمة المجانية).',m_403:'الخدمة المجانية رفضت الطلب من هذا العنوان (غالبًا localhost). افتح الملف مباشرة أو من GitHub Pages.',m_busy:'الخدمة المجانية مشغولة أو وصلت للحد. حاول بعد دقيقة.',m_fail:'فشل: ',m_ok:'اتكتبت. راجع كل سطر وعدّل قبل التنزيل.',m_drop:n=>'اتشال '+n+' بند لأنه مالوش اقتباس في بياناتك.',m_demo:'عينة ثابتة وهمية، مش من الذكاء الاصطناعي.',m_blank:'قالب يدوي: اكتب مكان الأقواس.',pg:n=>n+' صفحة (الحد الأقصى 2)',over:n=>'السيرة '+n+' صفحات. الحد صفحتان: اضغط الضبط التلقائي أو اختصر.',miss:'أسئلة للعميل: ',sc_note:'من 100 بقواعد محلية',pts:'نقطة',k_no:'اكتب وظيفة مستهدفة لتفعيل فحص الكلمات المفتاحية (بيتحسب التقييم من 85 وتتحول لـ 100).'},
+en:{title:'ATS CV Builder',ul:'العربية',h_in:'Client data',l_raw:'Raw data (any order)',p_raw:"Paste the client's data: name, title, contacts, jobs with dates, education, skills, courses, languages",l_lang:'CV language',o_auto:'Same as the data',l_target:'Target job (improves keywords)',p_target:'e.g. Customer Support Agent',c_agree:'I agree the text is sent to the free Pollinations service (needs internet; it may cache the reply up to 30 days). For AI writing only.',b_gen:'Write CV with AI',b_blank:'Blank template (manual)',b_demo:'Fixed fictional sample',w_ai:'AI writing needs internet and one request per 45 s. Review is required: the tool removes any item without a quote from your data, which does not guarantee the wording is accurate.',h_style:'Layout controls',l_fs:'Font size',l_lh:'Line spacing',l_paper:'Paper',o_cream:'Cream',o_white:'White',l_acc:'Heading line color',b_fit:'Auto-fit to 2 pages',h_sec:'Sections (show and order)',h_ats:'ATS match score (guide)',h_sug:'Suggestions',w_ats:'A simple local score using the rules listed above. It is not from any real hiring system and does not guarantee acceptance. Real systems differ.',b_dl:'Download PDF (direct)',b_pr:'Print / save from browser',m_pdfw:'Preparing PDF... (first time it loads the font from Google Fonts)',m_pdfok:n=>'PDF downloaded: '+n+' page(s), real selectable text.',m_pdff:'Direct download failed (needs internet for the font). Try the print button. ',hint:'Direct download makes a PDF with real text and an embedded font, auto-fitted to 2 pages. The print button is a browser fallback. You can edit the text on the paper.',sec:{summary:'Summary',skills:'Key skills',experience:'Experience',education:'Education',certs:'Certifications',langs:'Languages'},m_paste:'Paste the data first.',m_agree:'Tick the consent box before AI writing.',m_wait:'Writing... (up to 30 s)',m_cool:n=>'Wait '+n+' s (free service limit).',m_403:'The free service rejected this address (usually localhost). Open the file directly or from GitHub Pages.',m_busy:'The free service is busy or at its limit. Try again in a minute.',m_fail:'Failed: ',m_ok:'Written. Review and edit every line before downloading.',m_drop:n=>n+' item(s) removed: no quote in your data.',m_demo:'Fixed fictional sample, not AI output.',m_blank:'Manual template: type over the brackets.',pg:n=>n+' page(s) (max 2)',over:n=>'CV is '+n+' pages. Max is 2: use Auto-fit or shorten.',miss:'Ask the client: ',sc_note:'out of 100, local rules',pts:'pts',k_no:'Add a target job to enable the keyword check (score is out of 85, scaled to 100).'}};
 let UI=localStorage.ui||'ar',last=0,CVD=null,ORDER=['summary','skills','experience','education','certs','langs'];
 const T=(k,a)=>{const v=I[UI][k];return typeof v==='function'?v(a):v};
 function setUI(l){UI=l;localStorage.ui=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';$('ul').textContent=I[l].ul;
@@ -106,9 +106,9 @@ async function generate(){const raw=$('raw').value.trim();if(!raw)return say(T('
 const w=45000-(Date.now()-last);if(w>0)return say(T('m_cool',Math.ceil(w/1000)));last=Date.now();$('gen').disabled=true;say(T('m_wait'));
 try{const L=$('lang').value==='ar'?'Arabic':$('lang').value==='en'?'English':'same as the candidate data',tg=$('target').value.slice(0,120);
 const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'openai',messages:[{role:'system',content:SYS.replace('LANG',L)},{role:'user',content:(tg?'Target job: '+tg+'\n':'')+'CANDIDATE DATA:\n'+raw.slice(0,8000)}],response_format:{type:'json_object'}})});
-if([402,429,503].includes(r.status))throw new Error(T('m_busy'));if(!r.ok)throw new Error('HTTP '+r.status);
+if(r.status===403)throw new Error(T('m_403'));if([402,429,503].includes(r.status))throw new Error(T('m_busy'));if(!r.ok)throw new Error('HTTP '+r.status);
 const j=await r.json(),c=String(j.choices[0].message.content),o=JSON.parse(c.slice(c.indexOf('{'),c.lastIndexOf('}')+1)),v=verify(o,raw);
-draw(v.d);say(v.dr?T('m_drop',v.dr)+' '+T('m_ok'):T('m_ok'))}catch(e){say(T('m_fail')+(e&&e.message||e))}finally{upd()}}
+{const Ls=$('lang').value,ar=(raw.match(/[\u0600-\u06FF]/g)||[]).length,la=(raw.match(/[A-Za-z]/g)||[]).length;v.d.dir=Ls==='ar'?'rtl':Ls==='en'?'ltr':(ar>la?'rtl':'ltr')}draw(v.d);say(v.dr?T('m_drop',v.dr)+' '+T('m_ok'):T('m_ok'))}catch(e){say(T('m_fail')+(e&&e.message||e))}finally{upd()}}
 const FIX={ar:{dir:'rtl',name:'سامح أحمد',title:'مسؤول خدمة عملاء',email:'sameh.test@example.com',phone:'010XXXXXXXX',address:'الجيزة، مصر',summary:'عينة وهمية ثابتة.',skills:['التواصل','التعامل مع الشكاوى','Zendesk','Excel','تنظيم الوقت','إدخال البيانات'],experience:[{role:'مسؤول خدمة عملاء',company:'شركة الأفق التجريبية',period:'يناير 2023 - الآن',bullets:['الرد على استفسارات العملاء بالمكالمات والبريد','تسجيل الشكاوى على Zendesk','متابعة حل مشاكل الفواتير']},{role:'موظف مركز اتصال',company:'شركة المسار التجريبية',period:'يوليو 2020 - ديسمبر 2022',bullets:['استقبال المكالمات وشرح الخدمات','تسجيل طلبات العملاء']}],education:[{school:'جامعة حلوان',year:'2020',detail:'بكالوريوس تجارة'}],certifications:['دورة أساسيات خدمة العملاء 2021','دورة Excel للمبتدئين 2022'],languages:['العربية (لغة أم)','الإنجليزية (جيد)'],missing:[]},
 en:{dir:'ltr',name:'Sameh Ahmed',title:'Customer Support Specialist',email:'sameh.test@example.com',phone:'010XXXXXXXX',address:'Giza, Egypt',summary:'Fixed fictional sample.',skills:['Communication','Complaint handling','Zendesk','Excel','Time management','Data entry'],experience:[{role:'Customer Support Specialist',company:'Horizon Test Services',period:'Jan 2023 - Present',bullets:['Answered customer questions by phone and email','Logged complaints in Zendesk','Followed up on billing issues']},{role:'Call Center Agent',company:'Masar Test Co',period:'Jul 2020 - Dec 2022',bullets:['Handled incoming calls and explained services','Recorded customer requests']}],education:[{school:'Helwan University',year:'2020',detail:'BCom'}],certifications:['Customer Service Basics 2021','Excel for Beginners 2022'],languages:['Arabic (Native)','English (Good)'],missing:[]}};
 function demo(){draw(FIX[UI==='ar'?'ar':'en']);say(T('m_demo'))}
@@ -154,6 +154,111 @@ $('tb').innerHTML=R.map(r=>`<tr><td class="${r[3]?'ok':'no'}">${r[3]?'&#10003;':
 $('sg').innerHTML=S.map(s=>'<li>'+esc(s)+'</li>').join('')||'<li class="ok">&#10003;</li>'}
 function dl(){const old=document.title,n=(($('cv').querySelector('h1')||{}).innerText||'CV').trim().replace(/[\\/:*?"<>|]+/g,' ');document.title=n+' - CV';const cv=$('cv');const tr=cv.style.transform;cv.style.transform='none';window.print();cv.style.transform=tr;document.title=old}
 window.addEventListener('afterprint',()=>setTimeout(measure,50));addEventListener('resize',measure);$('cv').addEventListener('input',()=>{clearTimeout(window.__t);window.__t=setTimeout(measure,300)});
+/* ===== Direct PDF export: real text, embedded fonts, own Arabic shaping (no library) ===== */
+const FU={ami:['https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUp.ttf','https://fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY4.ttf'],lato:['https://fonts.gstatic.com/s/lato/v25/S6uyw4BMUTPHvxk.ttf','https://fonts.gstatic.com/s/lato/v25/S6u9w4BMUTPHh6UVew8.ttf']},FC={};
+async function loadFont(k,i){const u=FU[k][i];if(FC[u])return FC[u];const r=await fetch(u);if(!r.ok)throw new Error('font '+r.status);return FC[u]=parseTTF(new Uint8Array(await r.arrayBuffer()))}
+function parseTTF(b){const v=new DataView(b.buffer,b.byteOffset,b.byteLength),n=v.getUint16(4),T={};
+for(let i=0;i<n;i++){const o=12+i*16;T[String.fromCharCode(b[o],b[o+1],b[o+2],b[o+3])]=[v.getUint32(o+8),v.getUint32(o+12)]}
+const h=T.head[0],hh=T.hhea[0],nh=v.getUint16(hh+34),map={};
+const co=T.cmap[0],nt=v.getUint16(co+2);let off4=0;
+for(let i=0;i<nt;i++){const o=co+v.getUint32(co+8+i*8);if(v.getUint16(o)===4&&!off4)off4=o}
+const o=off4,sc=v.getUint16(o+6)/2,eo=o+14,so=eo+sc*2+2,dO=so+sc*2,rO=dO+sc*2;
+for(let i=0;i<sc;i++){const e=v.getUint16(eo+i*2),s=v.getUint16(so+i*2),d=v.getInt16(dO+i*2),ro=v.getUint16(rO+i*2);
+for(let c=s;c<=e&&c<0xFFFF;c++){let g;if(!ro)g=(c+d)&0xFFFF;else{g=v.getUint16(rO+i*2+ro+(c-s)*2);if(g)g=(g+d)&0xFFFF}if(g)map[c]=g}}
+return{b,upem:v.getUint16(h+18),asc:v.getInt16(hh+4),desc:v.getInt16(hh+6),bb:[v.getInt16(h+36),v.getInt16(h+38),v.getInt16(h+40),v.getInt16(h+42)],map,adv:g=>v.getUint16(T.hmtx[0]+4*Math.min(g,nh-1))}}
+const DUAL={},RJ={};
+[[0x628,0xFE8F],[0x62A,0xFE95],[0x62B,0xFE99],[0x62C,0xFE9D],[0x62D,0xFEA1],[0x62E,0xFEA5],[0x633,0xFEB1],[0x634,0xFEB5],[0x635,0xFEB9],[0x636,0xFEBD],[0x637,0xFEC1],[0x638,0xFEC5],[0x639,0xFEC9],[0x63A,0xFECD],[0x641,0xFED1],[0x642,0xFED5],[0x643,0xFED9],[0x644,0xFEDD],[0x645,0xFEE1],[0x646,0xFEE5],[0x647,0xFEE9],[0x64A,0xFEF1],[0x626,0xFE89]].forEach(a=>DUAL[a[0]]=a[1]);
+[[0x627,0xFE8D],[0x62F,0xFEA9],[0x630,0xFEAB],[0x631,0xFEAD],[0x632,0xFEAF],[0x648,0xFEED],[0x629,0xFE93],[0x622,0xFE81],[0x623,0xFE83],[0x624,0xFE85],[0x625,0xFE87],[0x649,0xFEEF]].forEach(a=>RJ[a[0]]=a[1]);
+const LA={0x622:0xFEF5,0x623:0xFEF7,0x625:0xFEF9,0x627:0xFEFB},MARK=c=>(c>=0x64B&&c<=0x652)||c===0x670;
+const isAr=c=>(c>=0x600&&c<=0x6FF&&!(c>=0x660&&c<=0x669)&&c!==0x60C&&c!==0x61B&&c!==0x61F&&!(c>=0x6F0&&c<=0x6F9))||(c>=0xFB50&&c<=0xFEFF);
+function cls(c){if(isAr(c))return'R';if((c>=48&&c<=57)||(c>=65&&c<=90)||(c>=97&&c<=122)||(c>=0xC0&&c<=0x24F)||(c>=0x660&&c<=0x669)||(c>=0x6F0&&c<=0x6F9))return'L';return'N'}
+const MIR={'(':')',')':'(','[':']',']':'[','{':'}','}':'{'};
+function shape(str,F){const ch=[...str].map(s=>s.codePointAt(0)),U=[],baseAt=i=>{for(let j=i;j>=0;j--)if(!MARK(ch[j]))return ch[j];return 0},nextBase=i=>{for(let j=i;j<ch.length;j++)if(!MARK(ch[j]))return ch[j];return 0};
+const mk=(code,u,orig)=>{const g=F.map[code]||F.map[orig]||F.map[63]||0;return{g,u,w:F.adv(g)/F.upem,c:orig,cl:cls(orig),m:0}};
+for(let i=0;i<ch.length;i++){const c=ch[i];
+if(MARK(c)){const g=F.map[c]||0;U.push({g,u:String.fromCodePoint(c),w:0,c,cl:'R',m:1});continue}
+if(!(c>=0x621&&c<=0x64A)){U.push(mk(c,String.fromCodePoint(c),c));continue}
+const pv=i>0?(()=>{let j=i-1;while(j>=0&&MARK(ch[j]))j--;return j>=0?ch[j]:0})():0,pj=!!DUAL[pv];
+if(c===0x644){let j=i+1;while(j<ch.length&&MARK(ch[j]))j++;const a=ch[j];if(LA[a]&&j===i+1){U.push(mk(LA[a]+(pj?1:0),'ل'+String.fromCodePoint(a),c));i=j;continue}}
+const nx=nextBase(i+1),nj=!!(DUAL[nx]||RJ[nx]);let code;
+if(DUAL[c]){const b=DUAL[c];code=b+(pj&&nj?3:pj?1:nj?2:0)}else if(RJ[c]){code=RJ[c]+(pj?1:0)}else code=0xFE80;
+U.push(mk(code,String.fromCodePoint(c),c))}return U}
+function reorder(L,base){/* L: units of one line (logical). returns visual array */
+const n=L.length,cl=L.map(u=>u.cl);for(let i=1;i<n;i++)if(cl[i]==='N'&&cl[i-1]==='L'&&'#+%\u00AE\u2122'.includes(String.fromCharCode(L[i].c)))cl[i]='L';const OP={'(':')','[':']','{':'}'},st=[],pr=[];
+L.forEach((u,i)=>{const ch=String.fromCharCode(u.c);if(OP[ch])st.push([i,OP[ch]]);else if(')]}'.includes(ch)&&u.c<128){for(let k=st.length-1;k>=0;k--)if(st[k][1]===ch){pr.push([st[k][0],i]);st.length=k;break}}});
+pr.forEach(([o,c])=>{let hasB=0,hasO=0;for(let k=o+1;k<c;k++){if(cl[k]===base)hasB=1;else if(cl[k]!=='N')hasO=1}let r=null;if(hasB)r=base;else if(hasO){let p=base;for(let k=o-1;k>=0;k--)if(cl[k]!=='N'){p=cl[k];break}r=p!==base?p:base}if(r){cl[o]=r;cl[c]=r}});
+for(let i=0;i<n;){if(cl[i]!=='N'){i++;continue}let j=i;while(j<n&&cl[j]==='N')j++;const a=i>0?cl[i-1]:base,b=j<n?cl[j]:base,r=a===b?a:base;for(let k=i;k<j;k++)cl[k]=r;i=j}
+const runs=[];for(let i=0;i<n;i++){if(runs.length&&runs[runs.length-1].c===cl[i])runs[runs.length-1].u.push(L[i]);else runs.push({c:cl[i],u:[L[i]]})}
+runs.forEach(r=>{r.u.forEach(u=>u.rc=r.c);if(r.c==='R')r.u.reverse()});
+if(base==='R')runs.reverse();return runs.flatMap(r=>r.u)}
+function breakLines(U,maxw,size){const W=[];let cur=[];U.forEach(u=>{if(u.c===32||u.c===160){if(cur.length)W.push(cur);cur=[];W.push([u])}else cur.push(u)});if(cur.length)W.push(cur);
+const lines=[];let L=[],w=0;W.forEach(wd=>{const sp=wd.length===1&&(wd[0].c===32||wd[0].c===160),ww=wd.reduce((a,u)=>a+u.w,0)*size;
+if(sp){if(L.length)L.push(wd[0]),w+=ww;return}
+if(L.length&&w+ww>maxw){while(L.length&&L[L.length-1].c===32)L.pop();lines.push(L);L=[];w=0}
+L=L.concat(wd);w+=ww});while(L.length&&L[L.length-1].c===32)L.pop();if(L.length)lines.push(L);return lines}
+const lineW=(L,size)=>L.reduce((a,u)=>a+u.w,0)*size;
+/* model: {rtl, paper:'cream'|'white', accent:'#hex', blocks:[...]} blocks: {k:'p',t,sz,b,al:'c'|'s'(start),gap,bul,rule,keep} | {k:'row',a,b,sz,gap} */
+async function makePDF(model,fs,lh){const rtl=model.rtl,base=rtl?'R':'L',fk=rtl?'ami':'lato',FS=[await loadFont(fk,0),await loadFont(fk,1)],SC=rtl?1.1:1;
+const PW=595.28,PH=841.89,MX=42.5,MT=39.7,MB=39.7,CW=PW-2*MX,use=[{},{},{},{}];
+const accent=(h=>[1,3,5].map(i=>(parseInt(h.slice(i,i+2),16)/255).toFixed(3)).join(' '))(model.accent||'#333333');
+let pages=[],ops=null,y=0;const np=()=>{ops=[];pages.push(ops);if(model.paper==='cream')ops.push('0.980 0.969 0.953 rg 0 0 '+PW+' '+PH+' re f');y=MT};np();
+const hx=n=>n.toString(16).padStart(4,'0');
+function drawLine(L,x0,top,size,bi,lineH){const F=FS[bi],V=reorder(L,base);let x=x0;const bl=PH-(top+(lineH-(F.asc-F.desc)/F.upem*size)/2+F.asc/F.upem*size);
+const pos=new Map();V.forEach(u=>{pos.set(u,x);x+=u.w*size});
+let s='BT 0.133 0.133 0.133 rg /F'+(bi+1)+' '+size.toFixed(2)+' Tf ';
+L.forEach((u,i)=>{if(u.g===undefined)return;let px=pos.get(u),g=u.g;
+if(u.m){let j=i-1;while(j>0&&L[j].m)j--;const b=L[j];if(b&&pos.has(b))px=pos.get(b)+b.w*size/2}
+if(u.rc==='R'&&MIR[String.fromCharCode(u.c)]){const m=FS[bi].map[MIR[String.fromCharCode(u.c)].charCodeAt(0)];if(m)g=m}
+let fi=bi;if(u.rc==='R'&&MIR[String.fromCharCode(u.c)])fi=bi+2;use[fi][g]=u.u;s+='/F'+(fi+1)+' '+size.toFixed(2)+' Tf 1 0 0 1 '+px.toFixed(2)+' '+bl.toFixed(2)+' Tm <'+hx(g)+'> Tj '});
+ops.push(s+'ET')}
+function para(t,size,bi,al,indent,bulletTxt){const F=FS[bi],U=shape(t,F),lines=breakLines(U,CW-indent,size),lineH=size*lh,out=[];
+lines.forEach((L,i)=>{if(y+lineH>PH-MB)np();const w=lineW(L,size);let x;const startR=rtl;
+const left=MX+(rtl?0:indent),right=PW-MX-(rtl?indent:0);
+if(al==='c')x=MX+(CW-w)/2;else x=rtl?right-w:left;
+if(i===0&&bulletTxt){const B=shape(bulletTxt,F),bw=lineW(B,size);const bx=rtl?PW-MX-bw:MX;B.forEach(u=>{});drawLine(B,bx,y,size,bi,lineH)}
+drawLine(L,x,y,size,bi,lineH);y+=lineH});return lines.length*size*lh}
+for(const b of model.blocks){const size=b.sz*fs*SC,bi=b.b?1:0;
+if(b.k==='p'){if(b.keep&&y+size*lh*3>PH-MB)np();para(b.t,size,bi,b.al,b.bul?14.2:0,b.bul?'\u2022':'');
+if(b.rule){y+=2;ops.push(accent+' RG 0.75 w '+MX+' '+(PH-y).toFixed(2)+' m '+(PW-MX)+' '+(PH-y).toFixed(2)+' l S')}
+y+=b.gap*.75*fs/11}
+else{const F=FS[1],A=shape(b.a,F),B=shape(b.b,F),wb=lineW(B,size);const lines=breakLines(A,CW-wb-12,size),lineH=size*lh;
+if(y+lineH*2>PH-MB)np();
+lines.forEach((L,i)=>{if(y+lineH>PH-MB)np();const w=lineW(L,size);drawLine(L,rtl?PW-MX-w:MX,y,size,1,lineH);if(i===0)drawLine(B,rtl?MX:PW-MX-wb,y,size,1,lineH);y+=lineH});y+=b.gap*.75*fs/11}}
+return{pages,use,FS,PW,PH}}
+async function fl(u8){return new Uint8Array(await new Response(new Blob([u8]).stream().pipeThrough(new CompressionStream('deflate'))).arrayBuffer())}
+async function writePDF(r,title){const enc=new TextEncoder(),objs=[],add=p=>{objs.push(p);return objs.length};
+const strm=(d,b)=>[enc.encode('<<'+d+'/Length '+b.length+'>>\nstream\n'),b,enc.encode('\nendstream')];
+add(null);add(null);const fonts=[];
+const FF={};for(let i=0;i<4;i++){const F=r.FS[i%2],ff=FF[i%2]||(FF[i%2]=add(strm('/Filter/FlateDecode/Length1 '+F.b.length,await fl(F.b))));
+const k=1000/F.upem,fd=add([enc.encode('<</Type/FontDescriptor/FontName/'+(['AAAAAA','BBBBBB','CCCCCC','DDDDDD'][i])+'+CVFont/Flags 4/FontBBox['+F.bb.map(x=>Math.round(x*k)).join(' ')+']/ItalicAngle 0/Ascent '+Math.round(F.asc*k)+'/Descent '+Math.round(F.desc*k)+'/CapHeight '+Math.round(F.asc*k*.7)+'/StemV 80/FontFile2 '+ff+' 0 R>>')]);
+const gs=Object.keys(r.use[i]).map(Number).sort((a,b)=>a-b),W=gs.map(g=>g+'['+Math.round(F.adv(g)*k)+']').join(' ');
+const cm='/CIDInit /ProcSet findresource begin 12 dict begin begincmap /CMapName/Adobe-Identity-UCS def /CMapType 2 def 1 begincodespacerange <0000> <FFFF> endcodespacerange\n'+gs.map(g=>'<'+g.toString(16).padStart(4,'0')+'> <'+[...r.use[i][g]].map(ch=>{const c=ch.codePointAt(0);return c>0xFFFF?((c-0x10000>>10)+0xD800).toString(16).padStart(4,'0')+((c-0x10000&1023)+0xDC00).toString(16).padStart(4,'0'):c.toString(16).padStart(4,'0')}).join('')+'>').reduce((a,l,j)=>a+(j%100===0?(j?'endbfchar\n':'')+Math.min(100,gs.length-j)+' beginbfchar\n':'')+l+'\n','')+(gs.length?'endbfchar\n':'')+'endcmap CMapName currentdict /CMap defineresource pop end end';
+const tu=add(strm('/Filter/FlateDecode',await fl(enc.encode(cm))));
+const cid=add([enc.encode('<</Type/Font/Subtype/CIDFontType2/BaseFont/'+(['AAAAAA','BBBBBB','CCCCCC','DDDDDD'][i])+'+CVFont/CIDSystemInfo<</Registry(Adobe)/Ordering(Identity)/Supplement 0>>/FontDescriptor '+fd+' 0 R/CIDToGIDMap/Identity/DW 500/W['+W+']>>')]);
+fonts.push(add([enc.encode('<</Type/Font/Subtype/Type0/BaseFont/'+(['AAAAAA','BBBBBB','CCCCCC','DDDDDD'][i])+'+CVFont/Encoding/Identity-H/DescendantFonts['+cid+' 0 R]/ToUnicode '+tu+' 0 R>>')]))}
+const pids=[];for(const p of r.pages){const c=add(strm('/Filter/FlateDecode',await fl(enc.encode(p.join('\n')))));pids.push(add([enc.encode('<</Type/Page/Parent 2 0 R/MediaBox[0 0 '+r.PW+' '+r.PH+']/Resources<</Font<</F1 '+fonts[0]+' 0 R/F2 '+fonts[1]+' 0 R/F3 '+fonts[2]+' 0 R/F4 '+fonts[3]+' 0 R>>>>/Contents '+c+' 0 R>>')]))}
+const info=add([enc.encode('<</Title<'+[...(title||'CV')].map(ch=>ch.charCodeAt(0).toString(16).padStart(4,'0')).join('').replace(/^/,'feff')+'>/Producer(Made By BLack)>>')]);
+objs[0]=[enc.encode('<</Type/Catalog/Pages 2 0 R>>')];objs[1]=[enc.encode('<</Type/Pages/Kids['+pids.map(p=>p+' 0 R').join(' ')+']/Count '+pids.length+'>>')];
+const parts=[enc.encode('%PDF-1.7\n%\xE2\xE3\xCF\xD3\n')];let len=parts[0].length;const offs=[];
+objs.forEach((o,i)=>{offs.push(len);const a=[enc.encode((i+1)+' 0 obj\n'),...o,enc.encode('\nendobj\n')];a.forEach(x=>{parts.push(x);len+=x.length})});
+let x='xref\n0 '+(objs.length+1)+'\n0000000000 65535 f \n'+offs.map(o=>String(o).padStart(10,'0')+' 00000 n \n').join('')+'trailer\n<</Size '+(objs.length+1)+'/Root 1 0 R/Info '+info+' 0 R>>\nstartxref\n'+len+'\n%%EOF';parts.push(enc.encode(x));return new Blob(parts,{type:'application/pdf'})}
+async function buildPdf(model,fs,lh){let r=await makePDF(model,fs,lh),n=0;while(r.pages.length>2&&n++<40){if(fs>8.5)fs-=.25;else if(lh>1.12)lh-=.04;else break;r=await makePDF(model,fs,lh)}return{blob:await writePDF(r,model.title),pages:r.pages.length,fs,lh}}
+
+function domModel(){const cv=$('cv'),rtl=cv.dir==='rtl',B=[],tx=e=>e.innerText.replace(/\s+/g,' ').trim(),ul=(e,sz)=>e&&e.querySelectorAll(':scope>li').forEach(li=>B.push({k:'p',t:tx(li),sz:1,b:0,al:'s',bul:1,gap:1.5}));
+const h=cv.querySelector('h1');if(h)B.push({k:'p',t:tx(h),sz:2.1,b:1,al:'c',gap:5});
+const t=cv.querySelector('.t');if(t)B.push({k:'p',t:tx(t),sz:1.14,b:1,al:'c',gap:5});
+const c=cv.querySelector('.c');if(c)B.push({k:'p',t:tx(c),sz:.95,b:0,al:'c',gap:14});
+cv.querySelectorAll('.sec:not(.hid)').forEach(s=>{const l=s.querySelector('.l');B.push({k:'p',t:tx(l),sz:1,b:1,al:'s',rule:1,gap:6,keep:1});
+[...s.querySelector('.b').children].forEach(e=>{if(e.tagName==='P')B.push({k:'p',t:tx(e),sz:1,b:0,al:'s',gap:3});else if(e.tagName==='UL')ul(e);else if(e.classList.contains('job')){const sp=e.querySelectorAll('.row span');B.push({k:'row',a:tx(sp[0]),b:tx(sp[1]),sz:1,gap:1});
+const d=e.children[1];if(d)B.push({k:'p',t:tx(d),sz:1,b:d.querySelector('b')?1:0,al:'s',gap:1});ul(e.querySelector('ul'));B[B.length-1].gap=9}});
+B[B.length-1].gap=11});
+return{rtl,paper:$('paper').value,accent:$('acc').value,title:(tx(h||{innerText:'CV'}))+' - CV',blocks:B}}
+async function dlPDF(test){if(!CVD)return;const b=$('dl');b.disabled=true;say(T('m_pdfw'));
+try{const m=domModel(),r=await buildPdf(m,+$('fs').value,+$('lh').value);
+if(test){const u=new Uint8Array(await r.blob.arrayBuffer());let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));document.body.setAttribute('data-pdf',btoa(s));document.title='PDFOK '+r.pages;return}
+const a=document.createElement('a');a.href=URL.createObjectURL(r.blob);a.download=m.title.replace(/[\\/:*?"<>|]+/g,' ')+'.pdf';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);
+say(T('m_pdfok',r.pages+(r.fs<+$('fs').value?' ('+r.fs+'pt)':'')))}catch(e){say(T('m_pdff')+(e.message||e));if(test)document.title='PDFERR '+e}finally{b.disabled=false}}
+
 function tick(){const n=new Date(),l=UI==='ar'?'ar-EG-u-nu-latn':'en-GB';$('clk').innerHTML=n.toLocaleTimeString('en-GB',{hour12:false})+'<small>'+n.toLocaleDateString(l,{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'</small>'}
 setInterval(tick,1000);tick();
 setUI(UI);
